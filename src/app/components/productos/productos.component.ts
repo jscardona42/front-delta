@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import * as XLSX from 'xlsx';
 import { ProductosService } from './productos.service';
 
@@ -7,8 +7,11 @@ import { ProductosService } from './productos.service';
   templateUrl: './productos.component.html',
   styleUrls: ['./productos.component.css']
 })
+
 export class ProductosComponent implements OnInit {
 
+  @ViewChild('fileid') fileid!: ElementRef;
+  productos: any = [];
 
   constructor(public productosService: ProductosService) { }
 
@@ -16,6 +19,7 @@ export class ProductosComponent implements OnInit {
   }
 
   fileUpload(event: any) {
+
     type Productos = {
       nombre: string,
       codigo: string,
@@ -25,7 +29,7 @@ export class ProductosComponent implements OnInit {
       bonificacion: number,
       descuento: number,
     }
-    // console.log(event.target.files);
+
     const selectdFile = event.target.files[0];
     const fileReader = new FileReader();
     fileReader.readAsBinaryString(selectdFile);
@@ -34,16 +38,29 @@ export class ProductosComponent implements OnInit {
       let workbook = XLSX.read(binaryData, { type: 'binary' });
       workbook.SheetNames.forEach(sheet => {
         try {
-          const data: Productos[] = XLSX.utils.sheet_to_json(workbook.Sheets[sheet]);
+          const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheet]);
         } catch (error) {
-          console.log('errro');
+          console.log('error');
         }
-        const data: Productos[] = XLSX.utils.sheet_to_json(workbook.Sheets[sheet]);
-        this.productosService.createProducto(data).subscribe(data => {
-          console.log(data);
-        });
+        const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheet]);
+
+        this.productos = XLSX.utils.sheet_to_json(workbook.Sheets[sheet]);
       })
     }
+  }
+
+  cancel() {
+    this.productos = [];
+    this.fileid.nativeElement.value = "";
+  }
+
+  sendFile() {
+    this.productosService.createProducto(this.productos).subscribe(data => {
+      console.log(data);
+    });
+    this.productos = [];
+    this.fileid.nativeElement.value = "";
+    alert("Guardado correctamente");
   }
 
 }

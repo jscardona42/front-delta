@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { CategoriasComponent } from './components/categorias/categorias.component';
 import { HttpClientModule } from "@angular/common/http";
 import { ProductosComponent } from './components/productos/productos.component';
+import { NotifierModule } from 'angular-notifier';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { ProductosComponent } from './components/productos/productos.component';
     ProductosComponent
   ],
   imports: [
+    NotifierModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule

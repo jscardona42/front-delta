@@ -9,7 +9,7 @@ export class ProductosService {
 
   constructor(private http: HttpClient) { }
 
-  createProducto(data: any): Observable<any>  {
-    return this.http.post("http://localhost:3005/productos/create", data);
+  createProducto(data: any): Observable<any> {
+    return this.http.post("http://localhost:3000/productos/create", data);
   }
 }
