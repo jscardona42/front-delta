@@ -7,12 +7,14 @@ import { CategoriasComponent } from './components/categorias/categorias.componen
 import { HttpClientModule } from "@angular/common/http";
 import { ProductosComponent } from './components/productos/productos.component';
 import { NotifierModule } from 'angular-notifier';
+import { SubcategoriasComponent } from './components/subcategorias/subcategorias.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CategoriasComponent,
-    ProductosComponent
+    ProductosComponent,
+    SubcategoriasComponent
   ],
   imports: [
     NotifierModule,

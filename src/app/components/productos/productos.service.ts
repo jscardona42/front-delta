@@ -6,10 +6,11 @@ import { Observable } from 'rxjs/internal/Observable';
   providedIn: 'root'
 })
 export class ProductosService {
+API = "http://localhost:3000";
 
   constructor(private http: HttpClient) { }
 
   createProducto(data: any): Observable<any> {
-    return this.http.post("http://localhost:3000/productos/create", data);
+    return this.http.post(this.API + "/productos/create", data);
   }
 }

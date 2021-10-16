@@ -20,16 +20,18 @@ export class ProductosComponent implements OnInit {
 
   fileUpload(event: any) {
 
+    // Se crea un tipo de datos con los párametros que devuelve el producto. (los atributos o campos)
     type Productos = {
       nombre: string,
       codigo: string,
       costo: number,
       cantidad: number,
-      ipc2: number,
+      ipc: number,
       bonificacion: number,
       descuento: number,
     }
 
+    // Esto es sólo para la carga del archivo
     const selectdFile = event.target.files[0];
     const fileReader = new FileReader();
     fileReader.readAsBinaryString(selectdFile);
@@ -43,7 +45,6 @@ export class ProductosComponent implements OnInit {
           console.log('error');
         }
         const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheet]);
-
         this.productos = XLSX.utils.sheet_to_json(workbook.Sheets[sheet]);
       })
     }
