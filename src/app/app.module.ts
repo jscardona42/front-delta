@@ -8,19 +8,23 @@ import { HttpClientModule } from "@angular/common/http";
 import { ProductosComponent } from './components/productos/productos.component';
 import { NotifierModule } from 'angular-notifier';
 import { SubcategoriasComponent } from './components/subcategorias/subcategorias.component';
+import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     CategoriasComponent,
     ProductosComponent,
-    SubcategoriasComponent
+    SubcategoriasComponent,
+    UsuariosComponent
   ],
   imports: [
     NotifierModule,
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
