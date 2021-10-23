@@ -3,7 +3,7 @@ export interface Productos {
     codigo: string
     costo: number
     cantidad: number
-    ipc2: number
+    ipc: number
     bonificacion: number
     descuento: number
 }

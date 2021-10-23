@@ -13,4 +13,9 @@ export class UsuariosService {
   signIn(data: any): Observable<any> {
     return this.http.post(this.API + "/usuarios/iniciarsesion", data);
   }
+  createUsuarios(data: any): Observable<any> {
+    return this.http.post(this.API + "/usuarios/create", data);
+
+  }
+
 }
