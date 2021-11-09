@@ -2,12 +2,28 @@
   <div class="row mt-4">
     <div class="col-md-6 mx-auto">
       <div class="card">
-        <div class="card-header text-center">
-          <h2>Cargar ordenes de compra</h2>
+        <div class="card-header text-center" style="background-color: #fff">
+          <img src="../../../assets/img/delta-logo.png" alt="" />
         </div>
-        <div class="card-body">
+        <!-- #ffee00" -->
+
+        <div class="card-body text-center">
+          <div class="mt-3">
+            <h2>Cargar órdenes de compra</h2>
+          </div>
           <form id="file-form">
-            <input type="file" (change)="fileUpload($event)" #fileid name="file-excel" id="file-excel" accept=".xls,.xlsx" />
+            <div class="file-upload-wrapper">
+              <input
+                type="file"
+                class="form-control"
+                id="customFile"
+                (change)="fileUpload($event)"
+                #fileid
+                name="file-excel"
+                id="file-excel"
+                accept=".xls,.xlsx"
+              />
+            </div>
           </form>
         </div>
       </div>
@@ -31,14 +47,14 @@
         </thead>
         <tbody>
           <tr *ngFor="let producto of productos">
-            <td>{{producto.codigo}}</td>
-            <td>{{producto.nombre}}</td>
-            <td>{{producto.costo}}</td>
-            <td>{{producto.cantidad}}</td>
-            <td>{{producto.bonificacion}}</td>
-            <td>{{producto.descuento}}</td>
-            <td>{{producto.ipc}}</td>
-            <td>{{producto.iva}}</td>
+            <td>{{ producto.codigo }}</td>
+            <td>{{ producto.nombre }}</td>
+            <td>{{ producto.costo }}</td>
+            <td>{{ producto.cantidad }}</td>
+            <td>{{ producto.bonificacion }}</td>
+            <td>{{ producto.descuento }}</td>
+            <td>{{ producto.ipc }}</td>
+            <td>{{ producto.iva }}</td>
           </tr>
         </tbody>
       </table>
@@ -47,7 +63,9 @@
       <button (click)="cancel()" class="btn btn-danger col-12">Cancelar</button>
     </div>
     <div class="col-md-2">
-      <button (click)="sendFile()" class="btn btn-success col-12">Enviar</button>
+      <button (click)="sendFile()" class="btn btn-success col-12">
+        Enviar
+      </button>
     </div>
   </div>
 </div>

@@ -6,18 +6,29 @@ import { UsuariosService } from './usuarios.service';
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
-  styleUrls: ['./usuarios.component.css']
+  styleUrls: ['./usuarios.component.css'],
 })
 export class UsuariosComponent implements OnInit {
-  
   @ViewChild('signInForm') signInForm!: ElementRef;
+
+  signin = true;
+  signup = false;
 
   constructor(
     public usuariosService: UsuariosService,
     private router: Router
-    ) { }
+  ) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  goRegister() {
+    this.signin = false;
+    this.signup = true;
+  }
+
+  goLogin() {
+    this.signin = true;
+    this.signup = false;
   }
 
   signIn(data: NgForm) {
@@ -29,9 +40,10 @@ export class UsuariosComponent implements OnInit {
         data.reset();
         alert(err.error.message);
         this.router.navigateByUrl('/usuarios');
-      })
+      }
+    );
   }
-  
+
   createUsuarios(data: NgForm) {
     // pRobar si llega algo.
     //console.log(data.value);
@@ -39,13 +51,14 @@ export class UsuariosComponent implements OnInit {
     this.usuariosService.createUsuarios(data.value).subscribe(
       //Si todo esta bien, se redirije a productos
       (data) => {
-       this.router.navigateByUrl('/productos');
+        this.router.navigateByUrl('/productos');
       },
       // Si hay un error, se redirije a usuarios
       (err) => {
         data.reset();
         alert(err.error.message);
-        this.router.navigateByUrl('/usuarios'); 
-      })
-    }
+        this.router.navigateByUrl('/usuarios');
+      }
+    );
+  }
 }
