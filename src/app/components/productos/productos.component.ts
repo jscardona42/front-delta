@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import * as XLSX from 'xlsx';
 import { ProductosService } from './productos.service';
 
@@ -13,7 +14,10 @@ export class ProductosComponent implements OnInit {
   @ViewChild('fileid') fileid!: ElementRef;
   productos: any = [];
 
-  constructor(public productosService: ProductosService) { }
+  constructor(
+    public productosService: ProductosService,
+    private toastr: ToastrService
+    ) { }
 
   ngOnInit(): void {
   }
@@ -61,7 +65,7 @@ export class ProductosComponent implements OnInit {
     });
     this.productos = [];
     this.fileid.nativeElement.value = "";
-    alert("Guardado correctamente");
+    this.toastr.success('OK!', 'Guardado correctamente!');
   }
 
 }
