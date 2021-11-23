@@ -10,7 +10,8 @@ const routes: Routes = [
   { path: 'categorias', component: CategoriasComponent, canActivate: [AuthGuard] },
   { path: 'productos', component: ProductosComponent, canActivate: [AuthGuard] },
   { path: 'subcategorias', component: SubcategoriasComponent, canActivate: [AuthGuard] },
-  { path: 'usuarios', component: UsuariosComponent }
+  { path: 'usuarios', component: UsuariosComponent },
+  { path: '', redirectTo: 'usuarios', pathMatch: 'full' }
 ];
 
 @NgModule({
