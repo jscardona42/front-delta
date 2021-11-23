@@ -68,7 +68,7 @@ export class UsuariosComponent implements OnInit {
         // Si hay un error, se redirije a usuarios
         (err) => {
           data.reset();
-          swal.fire('Error', "err.error.message", 'error');
+          swal.fire('Error', "¡No fue posible registrarse!", 'error');
           this.router.navigateByUrl('/usuarios');
         }
       );
