@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { UsuariosService } from './usuarios.service';
 import { ToastrService } from 'ngx-toastr';
 import swal from 'sweetalert2';
-import { faCertificate } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-usuarios',
@@ -13,7 +12,6 @@ import { faCertificate } from '@fortawesome/free-solid-svg-icons';
 })
 export class UsuariosComponent implements OnInit {
   @ViewChild('signInForm') signInForm!: ElementRef;
-  faCooffe = faCertificate;
 
   signin = true;
   signup = false;
@@ -36,17 +34,17 @@ export class UsuariosComponent implements OnInit {
     this.signup = false;
   }
 
-  signIn(data: NgForm) {
-    if (!data.valid) {
+  signIn(form: NgForm) {
+    if (!form.valid) {
       this.toastr.error('No deje campos en blanco');
     } else {
-      this.usuariosService.signIn(data.value).subscribe(
+      this.usuariosService.signIn(form.value).subscribe(
         (data) => {
           localStorage.setItem("token", JSON.stringify(data.token));
           this.router.navigateByUrl('/productos');
         },
         (err) => {
-          data.reset();
+          form.reset();
           swal.fire('Error', err.error.message, 'error');
           this.router.navigateByUrl('/usuarios');
         }
@@ -54,12 +52,12 @@ export class UsuariosComponent implements OnInit {
     }
   }
 
-  createUsuarios(data: NgForm) {
-    if (!data.valid) {
+  createUsuarios(form: NgForm) {
+    if (!form.valid) {
       this.toastr.error('No deje campos en blanco');
     } else {
-      // Se llama el servicio y se le envía la data.value
-      this.usuariosService.createUsuarios(data.value).subscribe(
+      // Se llama el servicio y se le envía la form.value
+      this.usuariosService.createUsuarios(form.value).subscribe(
         (data) => {
           this.toastr.success('Inicie sesión para continuar!', 'Registrado correctamente');
           this.router.navigateByUrl('/usuarios');
@@ -67,8 +65,8 @@ export class UsuariosComponent implements OnInit {
         },
         // Si hay un error, se redirije a usuarios
         (err) => {
-          data.reset();
-          swal.fire('Error', "¡No fue posible registrarse!", 'error');
+          form.reset();
+          swal.fire('Error', err.error.message, 'error');
           this.router.navigateByUrl('/usuarios');
         }
       );

@@ -1,17 +1,63 @@
-<div class="col-md-8 mx-auto">
-    <table class="table table-sm table-bordered table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Nombre</th>
-        <th scope="col">Estado</th>
-      </tr>
-    </thead>
-    <tbody>
-    <!-- Recorremos el arreglo de subcategorias y accedemos a sus claves (nombre, estado)-->
-      <tr *ngFor="let subcategoria of subcategorias">
-        <td>{{subcategoria.nombre}}</td>
-        <td>{{subcategoria.estado}}</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="card card-outline shadow-lg p-3 mb-5 bg-body rounded">
+        <div class="card-header text-center border-dark">
+          <h3>Nueva</h3>
+        </div>
+        <div class="card-body">
+          <form #createSubForm="ngForm" (ngSubmit)="saveSubcategoria(createSubForm)">
+            <div class="form-outline mb-3">
+              <input type="text" class="form-control form-control" id="nombre" name="nombre"
+                placeholder="Nombre subcategoría" [(ngModel)]="subcategoriasService.selectedSubcategoria.nombre"
+                required />
+            </div>
+            <input type="hidden" name="id_subcategoria"
+              [(ngModel)]="subcategoriasService.selectedSubcategoria.id_subcategoria">
+            <div class="form-outline mb-3">
+              <button class="btn btn-success col-12">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-lg-8">
+      <div class="card card-outline shadow-lg p-3 mb-5 bg-body rounded">
+        <div class="card-header text-center border-dark">
+          <h3>Subcategorías</h3>
+        </div>
+        <div class="card-body">
+          <table class="table table-sm table-bordered table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Recorremos el arreglo de subcategorias y accedemos a sus claves (nombre, estado)-->
+              <tr *ngFor="let subcategoria of subcategorias | paginate:page_size:page_number, let i = index ">
+                <td>{{(i+1*(page_number*page_size)-4)}}</td>
+                <td>{{subcategoria.nombre}}</td>
+                <td>
+                  <button class="btn btn-primary btn-sm" title="Editar" (click)="editSubcategoria(subcategoria)">
+                    <fa-icon [icon]="faedit"></fa-icon>
+                  </button>
+                  <button class="btn btn-danger btn-sm ms-2" title="Eliminar"
+                    (click)="deleteSubcategoria(subcategoria.id_subcategoria)">
+                    <fa-icon [icon]="fadelete"></fa-icon>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <mat-paginator [length]="subcategorias.length" [pageSize]="page_size" (page)="handlePage($event)"
+            aria-label="Select page">
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
