@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'productos', component: ProductosComponent, canActivate: [AuthGuard] },
   { path: 'subcategorias', component: SubcategoriasComponent, canActivate: [AuthGuard] },
   { path: 'usuarios', component: UsuariosComponent },
-  { path: '', redirectTo: 'usuarios', pathMatch: 'full' }
+  { path: '', redirectTo: 'productos', pathMatch: 'full' }
 ];
 
 @NgModule({

@@ -15,6 +15,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { JwtModule } from '@auth0/angular-jwt';
 import { TokeninterceptorService } from './components/auth/tokeninterceptor.service';
+import { PaginatePipe } from './pipes/paginate.pipe';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -26,7 +28,8 @@ export function tokenGetter() {
     CategoriasComponent,
     ProductosComponent,
     SubcategoriasComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    PaginatePipe
   ],
   imports: [
     NotifierModule,
@@ -44,6 +47,7 @@ export function tokenGetter() {
         disallowedRoutes: [""],
       },
     }),
+    MatPaginatorModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokeninterceptorService, multi: true },
