@@ -53,6 +53,7 @@
             </div>
         </div>
     </div>
+
     <div
         class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-success">
         <!-- Copyright -->
@@ -60,8 +61,6 @@
             Copyright © 2021 Mercados Delta. Todos los derechos son reservados.
         </div>
         <!-- Copyright -->
-
-        <!-- Right -->
     </div>
 </section>
 
@@ -75,28 +74,35 @@
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                 <form #createForm="ngForm" (ngSubmit)="createUsuarios(createForm)">
                     <div class="divider d-flex align-items-center my-4">
-                        <h3 class="text-center fw-bold mx-3 mb-0">Registro</h3>
+                        <h3 class="text-center fw-bold mx-3 mb-0">Registro de usuarios</h3>
                     </div>
 
-                    <!-- Email input -->
+                    <!-- Nombre imput -->
                     <div class="form-outline mb-4">
                         <input type="name" class="form-control form-control-lg" id="nombre" autocomplete="off" name="nombre"
                             placeholder="Ingrese su nombre" ngModel required />
                         <label class="form-label" for="form3Example3">Nombre</label>
                     </div>
 
-                    <!-- Password input -->
+                    <!-- Email input -->
                     <div class="form-outline mb-3">
                         <input type="email" class="form-control form-control-lg" id="correo" autocomplete="off" name="correo"
                             placeholder="Ingrese correo" ngModel required />
                         <label class="form-label" for="form3Example4">Correo</label>
                     </div>
 
+                    <!-- Password input -->
                     <div class="form-outline mb-3">
                         <input type="password" class="form-control form-control-lg" id="clave" name="clave"
                             placeholder="Ingrese contraseña" ngModel required />
                         <label class="form-label" for="form3Example4">Contraseña</label>
                     </div>
+
+                    <!-- <div class="form-outline mb-3">
+                        <input type="password" class="form-control form-control-lg" id="clave" name="clave"
+                            placeholder="Ingrese nuevamente la contraseña" ngModel required />
+                        <label class="form-label" for="form3Example4">Confirmación</label>
+                    </div> -->
 
                     <div class="text-center text-lg-start mt-4 pt-2">
                         <button type="submit" class="btn btn-primary btn-lg"

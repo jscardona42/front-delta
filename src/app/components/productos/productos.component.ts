@@ -13,7 +13,6 @@ export class ProductosComponent implements OnInit {
 
   @ViewChild('fileid') fileid!: ElementRef;
   productos: any = [];
-
   constructor(
     public productosService: ProductosService,
     private toastr: ToastrService
