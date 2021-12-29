@@ -3,26 +3,26 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Categorias } from 'src/app/model/categorias.model';
+import { Subcategorias } from 'src/app/models/subcategorias.model';
 import swal from 'sweetalert2';
-import { CategoriasService } from './categorias.service';
+import { SubcategoriasService } from './subcategorias.service';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-subcategorias',
-  templateUrl: './categorias.component.html',
-  styleUrls: ['./categorias.component.css'],
+  templateUrl: './subcategorias.component.html',
+  styleUrls: ['./subcategorias.component.css'],
 })
-export class CategoriasComponent implements OnInit {
+export class SubcategoriasComponent implements OnInit {
   page_size: number = 5;
   page_number: number = 1;
 
-  categorias: any = [];
+  subcategorias: any = [];
   faedit = faEdit;
   fadelete = faTrash;
 
   constructor(
-    public categoriasService: CategoriasService,
+    public subcategoriasService: SubcategoriasService,
     private router: Router,
     private toastr: ToastrService,
     private paginator: MatPaginatorIntl
@@ -33,15 +33,15 @@ export class CategoriasComponent implements OnInit {
   // Evento que se ejecuta al iniciar la aplicación.
   ngOnInit(): void {
     console.log(this.paginator);
-    this.getCategorias();
+    this.getSubcategorias();
   }
 
   // Llamamos a subcategoriasService.getSubCategorias y traemos los datos de las subcategorias
-  getCategorias() {
-    this.categoriasService.getCategorias().subscribe(
+  getSubcategorias() {
+    this.subcategoriasService.getSubcategorias().subscribe(
       (data) => {
-        // Guardamos la data dentro de la variable de categorias que se declaró arriba
-        this.categorias = data;
+        // Guardamos la data dentro de la variable de subcategorias que se declaró arriba
+        this.subcategorias = data;
       },
       (err) => {
         console.log(err);
@@ -49,16 +49,16 @@ export class CategoriasComponent implements OnInit {
     );
   }
 
-  saveCategoria(form: NgForm) {
+  saveSubcategoria(form: NgForm) {
     if (!form.valid) {
       this.toastr.error('No deje campos en blanco');
     } else {
-      if (form.value.id_categoria) {
+      if (form.value.id_subcategoria) {
         // Se llama el servicio y se le envía la form.value
-        this.categoriasService.updateCategoria(form.value).subscribe(
+        this.subcategoriasService.updateSubcategoria(form.value).subscribe(
           (data) => {
             this.toastr.success('OK!', 'Actualizado correctamente');
-            this.getCategorias();
+            this.getSubcategorias();
             form.reset();
           },
           (err) => {
@@ -68,12 +68,12 @@ export class CategoriasComponent implements OnInit {
           }
         );
       } else {
-        form.value.id_categoria = undefined;
+        form.value.id_subcategoria = undefined;
         // Se llama el servicio y se le envía la form.value
-        this.categoriasService.createCategoria(form.value).subscribe(
+        this.subcategoriasService.createSubcategoria(form.value).subscribe(
           (data) => {
             this.toastr.success('OK!', 'Guardado correctamente');
-            this.getCategorias();
+            this.getSubcategorias();
             form.reset();
           },
           (err) => {
@@ -87,15 +87,15 @@ export class CategoriasComponent implements OnInit {
     }
   }
 
-  editCategoria(categoria: Categorias) {
-    this.categoriasService.selectedCategoria = categoria;
+  editSubcategoria(subcategoria: Subcategorias) {
+    this.subcategoriasService.selectedSubcategoria = subcategoria;
   }
 
-  deleteCategoria(id: string) {
+  deleteSubcategoria(id: string) {
 
     swal.fire({
       title: '',
-      text: "¿Está seguro de eliminar la categoría",
+      text: "¿Está seguro de eliminar la subcategoría",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -104,10 +104,10 @@ export class CategoriasComponent implements OnInit {
       confirmButtonText: 'Sí'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.categoriasService.deleteCategoria(id).subscribe(
+        this.subcategoriasService.deleteSubcategoria(id).subscribe(
           (data) => {
             this.toastr.error('OK!', 'Eliminado correctamente');
-            this.getCategorias();
+            this.getSubcategorias();
           },
           (err) => {
             console.log(err);
