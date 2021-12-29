@@ -6,4 +6,5 @@ export interface Productos {
     ipc: number
     bonificacion: number
     descuento: number
+    iva: number
 }
