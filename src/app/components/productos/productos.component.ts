@@ -18,12 +18,30 @@ export class ProductosComponent implements OnInit {
   products: any = [];
   fadelete = faTrash;
 
+  excel = true;
+  manual = false;
+
   constructor(
     public productosService: ProductosService,
     private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {}
+
+  cargaManual() {
+
+  this.excel = false;
+  this.manual = true;
+    
+  }
+
+  archivoExcel() {
+
+  this.excel = true;
+  this.manual = false;
+
+  }
+  
 
   fileUpload(event: any) {
     // Se crea un tipo de datos con los párametros que devuelve el producto. (Campos)
@@ -82,11 +100,11 @@ export class ProductosComponent implements OnInit {
     this.productosService.selectedProducto = producto;
   }
 
-  deleteProducto(index: any){
-    this.products.splice(index);
-    // console.log(index);
-    this.getProductos();
-    }
+  deleteProducto(index: any) {
+    this.products.splice(index, 1);
+    console.log(index);
+    // this.getProductos();
+  }
     
 
   sendFile() {

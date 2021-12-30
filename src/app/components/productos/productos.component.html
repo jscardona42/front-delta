@@ -1,4 +1,7 @@
-<!--
+<div class="col-md-2" *ngIf="excel">
+<button (click)="archivoExcel()" class="btn btn-default btn-link">Cargar archivos</button>
+</div>  
+
 <div class="container">
   <div class="row mt-4">
     <div class="col-md-6 mx-auto">
@@ -68,9 +71,14 @@
     </div>
   </div>
 </div>
--->
+
 
 <!-- Formulario proveedores -->
+
+<div class="col-md-2" *ngIf="manual">
+<button (click)="cargaManual()" class="btn btn-default btn-link">Cargar manualmente</button>
+</div> 
+
 <div class="container">
   <div class="row">
     <div class="col-12">
