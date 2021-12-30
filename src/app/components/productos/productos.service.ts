@@ -36,8 +36,8 @@ export class ProductosService {
     return this.http.put(this.API + '/update', data);
   }
 
-  deleteProducto(codigo: string) {
-    console.log(codigo);
-    return this.http.delete(this.API + `/delete/${codigo}`);
+  deleteProducto(index: any) {
+    console.log(index);
+    return this.http.delete(this.API + `/delete/${index}`);
   }
 }
